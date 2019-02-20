@@ -13,24 +13,29 @@ import _ from 'lodash';
 // document.body.appendChild(component());
 
 window.$l = (arg) => {
-  let nodeLists = document.querySelectorAll(arg); 
-  return Array.from(nodeLists); 
+  if (typeof arg === "string") {
+    const nodes = document.querySelectorAll(arg); 
+    const nodesA = Array.from(nodes); 
+    return new DomNodeCollection(nodesA); 
+  } else if (typeof arg === "HTMLElement") {
+    return new DomNodeCollection([arg]); 
+  }
 };
 
-function order() {
-  console.log("hello world"); 
-}
 
-order(); 
-
-
-window.$l = $l;
-
-
-
-getNodesFromDom = (selector) => {
-  const nodes = document.querySelectorAll(selector);
-  const nodesArray = Array.from(nodes);
-  return new DomNodeCollection(nodesArray);
+toQueryString = (obj) => {
+  let result = "";
+  for (const prop in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      result += `${prop}=${obj[prop]}&`;
+    }
+  }
+  return result.substring(0, result.length - 1);
 };
+
+
+
+
+// window.$l = $l;
+
 
