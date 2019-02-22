@@ -92,7 +92,33 @@ class DomNodeCollection{
     }); 
     return new DomNodeCollection(foundNodes); 
   }; 
-  remove; 
+
+  remove(){
+    this.each(node => node.parentNode.removeChild(node)); 
+  }
+
+  on(eventName, callback) {
+    this.each((node) => {
+      node.addEventListener(eventName, callback); 
+      const eventKey = `jqliteEvents-${eventName}`;
+      if (node[eventKey] === "undefined") {
+        node[eventKey] = []; 
+      }
+      node[eventKey].push(callback); 
+    })
+  }; 
+
+  off(eventName) {
+    this.each((node) => {
+      const eventKey = `jqliteEvents-${eventName}`;
+      if (node[eventKey]){
+        node[eventKey].forEach((callback) => {
+          node.removeEventListener(eventName, callback); 
+        });
+      }
+      node[eventKey] = []; 
+    }); 
+  }
 }
 
 module.exports = DomNodeCollection;
