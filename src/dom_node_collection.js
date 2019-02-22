@@ -90,9 +90,8 @@ class DomNodeCollection{
       const nodeList = node.querySelectorAll(selector); 
       foundNodes = foundNodes.concat(Array.from(nodeList)); 
     }); 
-    return new DomNodeCollection(foundNodes)
+    return new DomNodeCollection(foundNodes); 
   }; 
-
   remove; 
 }
 
