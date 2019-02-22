@@ -84,7 +84,14 @@ class DomNodeCollection{
     return new DomNodeCollection(parentNodes); 
   }
 
-  find; 
+  find(selector) {
+    let foundNodes = []; 
+    this.each((node) => {
+      const nodeList = node.querySelectorAll(selector); 
+      foundNodes = foundNodes.concat(Array.from(nodeList)); 
+    }); 
+    return new DomNodeCollection(foundNodes)
+  }; 
 
   remove; 
 }

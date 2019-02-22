@@ -126,7 +126,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (87:6)\\nYou may need an appropriate loader to handle this file type.\\n|   }\\r\\n| \\r\\n>   find; \\r\\n| \\r\\n|   remove; \\r\");\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
+eval("throw new Error(\"Module parse failed: Unexpected token (96:8)\\nYou may need an appropriate loader to handle this file type.\\n|   }; \\r\\n| \\r\\n>   remove; \\r\\n| }\\r\\n| \\r\");\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
 
 /***/ }),
 
