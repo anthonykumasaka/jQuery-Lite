@@ -12,6 +12,9 @@ import _ from 'lodash';
 
 // document.body.appendChild(component());
 
+const _docReadyCallbacks = [];
+let _docReady = false;
+
 window.$l = (arg) => {
   if (typeof arg === "string") {
     const nodes = document.querySelectorAll(arg); 
@@ -19,19 +22,30 @@ window.$l = (arg) => {
     return new DomNodeCollection(nodesA); 
   } else if (typeof arg === "HTMLElement") {
     return new DomNodeCollection([arg]); 
-  }
-};
-
-
-toQueryString = (obj) => {
-  let result = "";
-  for (const prop in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-      result += `${prop}=${obj[prop]}&`;
+  } else if (typeof arg === "function") {
+    if (!_docReady) {
+      _docReadyCallbacks.push(arg); 
+    } else {
+      arg(); 
     }
   }
-  return result.substring(0, result.length - 1);
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  _docReady = true; 
+  _docReadyCallbacks.forEach(func => func()); 
+}); 
+
+
+// toQueryString = (obj) => {
+//   let result = "";
+//   for (const prop in obj) {
+//     if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+//       result += `${prop}=${obj[prop]}&`;
+//     }
+//   }
+//   return result.substring(0, result.length - 1);
+// };
 
 
 
