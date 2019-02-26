@@ -45,6 +45,7 @@ $1.extend = (base, ...otherObjs) => {
   return base; 
 }; 
 
+
 $1.ajax = (options) => {
   const request = new XMLHttpRequest(); 
   const defaults = {
